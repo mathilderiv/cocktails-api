@@ -41,8 +41,9 @@ function Home() {
         return request.json();
       })
       .then((response) => {
-        console.log(response);
-        setCocktails(response);
+        // console.log(response.drinks);
+        setCocktails(response.drinks);
+        setIsLoading(false);
       });
   }, []);
 
