@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import Spinner from "../components/Spinner";
+import Input from "../components/Input";
 
 function Home() {
-  const letters = [
+  const [cocktails, setCocktails] = useState([]);
+  const [selectedLetters, setSelectedLetters] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+
+  const choosingLetter = [
     "a",
     "b",
     "c",
@@ -31,29 +36,53 @@ function Home() {
     "z",
   ];
 
-  const [cocktails, setCocktails] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a`)
+  const handleFetch = () => {
+    fetch(
+      `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${selectedLetters}`
+    )
       .then((request) => {
         // console.log(request);
         return request.json();
       })
       .then((response) => {
-        // console.log(response.drinks);
+        console.log(response.drinks);
         setCocktails(response.drinks);
         setIsLoading(false);
       });
-  }, []);
+  };
+
+  useEffect(() => {
+    handleFetch();
+  }, [selectedLetters]);
+
+  // useEffect(() => {
+  //   fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a`)
+  //     .then((request) => {
+  //       // console.log(request);
+  //       return request.json();
+  //     })
+  //     .then((response) => {
+  //       console.log(response.drinks);
+  //       setCocktails(response.drinks);
+  //       setIsLoading(false);
+  //     });
+  // }, []);
 
   if (isLoading) return <Spinner />;
   return (
-    <div>
-      {cocktails.map((cocktail) => {
-        return <p key={cocktail.idDrink}> {cocktail.strDrink}</p>;
-      })}
-    </div>
+    <>
+      <Input />
+      <div className="map">
+        {cocktails.map((cocktail, index) => {
+          return (
+            <div className="cocktail-description">
+              <p key={cocktail.idDrink}> {cocktail.strDrink}</p>
+              <img src={cocktail.strDrinkThumb} alt={cocktail.idDrink} />
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 }
 

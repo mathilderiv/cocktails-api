@@ -20,3 +20,44 @@
     transform: rotate(360deg);
   }
 }
+
+/* HEADER */
+
+.header {
+  background-color: #008080;
+  color: white;
+  padding: 2rem 2rem;
+  font-size: 2rem;
+}
+
+/* HOME */
+
+.map {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+  margin-top: 4rem;
+}
+
+.cocktail-description {
+  width: 20%;
+}
+.cocktail-description img {
+  height: 70%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.input-search {
+  margin-top: 3rem;
+  width: 100%;
+  text-align: center;
+}
+
+.input-search input {
+  width: 50%;
+  height: 2rem;
+  border: solid 2px #008080;
+  text-align: center;
+}
