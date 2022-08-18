@@ -1,7 +1,11 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 function Header() {
-  return <div className="header">Cocktails app</div>;
+  return (
+    <div className="header">
+      <Link to="/"> Cocktails app</Link>
+    </div>
+  );
 }
 
 export default Header;

@@ -37,7 +37,7 @@
   flex-wrap: wrap;
   text-align: center;
   justify-content: center;
-  margin-top: 4rem;
+  margin-top: 1rem;
 }
 
 .cocktail-description {
@@ -57,7 +57,21 @@
 
 .input-search input {
   width: 50%;
-  height: 2rem;
+  height: 3rem;
   border: solid 2px #008080;
   text-align: center;
+}
+
+/* BUTTON */
+
+.letters-buttons {
+  margin-top: 2rem;
+  text-align: center;
+}
+.letters-buttons button {
+  width: 2%;
+  height: 2rem;
+  margin-right: 1%;
+  background-color: transparent;
+  border: #008080 solid 2px;
 }
