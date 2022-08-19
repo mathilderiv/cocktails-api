@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import Spinner from "../components/Spinner";
 
@@ -13,7 +13,7 @@ function CocktailDetails() {
 
   useEffect(() => {
     fetch(
-      `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?${params.idDrink}`
+      `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${params.id}`
     )
       .then((request) => {
         //   console.log(request);

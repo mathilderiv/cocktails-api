@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 function Header() {
   return (
     <div className="header">
-      <Link to="/"> Cocktails app</Link>
+      <Link style={{ textDecoration: "none", color: "white" }} to="/">
+        Cocktails app
+      </Link>
     </div>
   );
 }
