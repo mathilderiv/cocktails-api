@@ -8,59 +8,46 @@ import Button from "../components/LettersButton";
 
 function Home() {
   const [cocktails, setCocktails] = useState([]);
-  const [selectedLetters, setSelectedLetters] = useState();
+  const [selectedLetters, setSelectedLetters] = useState("b");
   const [isLoading, setIsLoading] = useState(true);
 
-  // const choosingLetter = [
-  //   "a",
-  //   "b",
-  //   "c",
-  //   "d",
-  //   "e",
-  //   "f",
-  //   "g",
-  //   "h",
-  //   "i",
-  //   "j",
-  //   "k",
-  //   "l",
-  //   "m",
-  //   "n",
-  //   "o",
-  //   "p",
-  //   "q",
-  //   "r",
-  //   "s",
-  //   "t",
-  //   "u",
-  //   "v",
-  //   "w",
-  //   "x",
-  //   "y",
-  //   "z",
-  // ];
-
-  // const handleFetch = () => {
-  //   fetch(
-  //     `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${selectedLetters}`
-  //   )
-  //     .then((request) => {
-  //       // console.log(request);
-  //       return request.json();
-  //     })
-  //     .then((response) => {
-  //       console.log(response.drinks);
-  //       setCocktails(response.drinks);
-  //       setIsLoading(false);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   handleFetch();
-  // }, [selectedLetters]);
+  const choosingLetter = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+  ];
 
   useEffect(() => {
-    fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a`)
+    handleFetch();
+  }, [selectedLetters]);
+
+  const handleFetch = () => {
+    fetch(
+      `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${selectedLetters}`
+    )
       .then((request) => {
         // console.log(request);
         return request.json();
@@ -70,7 +57,7 @@ function Home() {
         setCocktails(response.drinks);
         setIsLoading(false);
       });
-  }, []);
+  };
 
   if (isLoading) return <Spinner />;
   return (
