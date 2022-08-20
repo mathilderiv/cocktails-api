@@ -4,40 +4,40 @@ import { Link } from "react-router-dom";
 
 import Spinner from "../components/Spinner";
 import Input from "../components/Input";
-import Button from "../components/LettersButton";
+import LettersButton from "../components/LettersButton";
 
 function Home() {
   const [cocktails, setCocktails] = useState([]);
-  const [selectedLetters, setSelectedLetters] = useState("b");
+  const [selectedLetters, setSelectedLetters] = useState("a");
   const [isLoading, setIsLoading] = useState(true);
 
   const choosingLetter = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
   ];
 
   useEffect(() => {
@@ -59,20 +59,47 @@ function Home() {
       });
   };
 
+  const handleSubmit = (event, research) => {
+    event.preventDefault();
+    // console.log("research" , research);
+
+    setIsLoading(true);
+    fetch(
+      `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${research}`
+    )
+      .then((request) => {
+        return request.json();
+      })
+      .then((response) => {
+        console.log(response);
+        setCocktails(response.drinks);
+        setIsLoading(false);
+      });
+  };
+
+  // console.log(selectedLetters);
   if (isLoading) return <Spinner />;
+
   return (
     <>
-      <Input />
-      <Button
-        setSelectedLetters={setSelectedLetters}
-        selectedLetters={selectedLetters}
-      />
+      <Input handleSubmit={handleSubmit} />
+      <div className="letters-buttons">
+        {choosingLetter.map((letter, index) => {
+          return (
+            <LettersButton
+              key={index}
+              letter={letter}
+              setSelectedLetters={setSelectedLetters}
+            />
+          );
+        })}
+      </div>
 
       <div className="map">
         {cocktails.map((cocktail) => {
           return (
-            <div className="cocktail-description">
-              <p key={cocktail.idDrink}> {cocktail.strDrink}</p>
+            <div key={cocktail.idDrink} className="cocktail-description">
+              <p> {cocktail.strDrink}</p>
               <Link to={`/cocktail/${cocktail.idDrink}`}>
                 <img src={cocktail.strDrinkThumb} alt={cocktail.idDrink} />
               </Link>

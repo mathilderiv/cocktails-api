@@ -1,21 +1,26 @@
 import { useState } from "react";
 
-function Input() {
+function Input({ handleSubmit }) {
   const [research, setResearch] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
   return (
     <div className="input-search">
-      <input
-        onChange={(event) => {
-          setResearch(event.target.value);
+      <form
+        onSubmit={(event) => {
+          handleSubmit(event, research);
         }}
-        type="text"
-        name={research}
-        placeholder="Choose your cocktails..."
-      ></input>
+      >
+        <label htmlFor="inputCocktails"></label>
+        <input
+          onChange={(event) => {
+            setResearch(event.target.value);
+          }}
+          id="inputCocktails"
+          type="text"
+          name={research}
+          placeholder="Choose your cocktails..."
+        ></input>
+      </form>
     </div>
   );
 }
